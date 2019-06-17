@@ -43,6 +43,8 @@ class Book(db.Model):
 class User(db.Model):
     __tablename = 'user'
     u_id = db.Column(db.Integer(20),primary_key=True)
+    u_name = db.Column(db.CHAR(40),nullable=False,index=True)
+    u_image = db.Column(db.VARCHAR(1000),nullable=False)
     #todo
 
 class Tag(db.Model):
