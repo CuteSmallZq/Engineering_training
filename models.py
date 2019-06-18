@@ -43,6 +43,7 @@ class Book(db.Model):
     b_introduction = db.Column(db.String(10000),nullable=False)
     b_pulishing_house = db.Column(db.String(500),nullable=False)
     b_writer = db.Column(db.String(100),nullable=False)
+    b_writer_intro = db.Column(db.String(10000),nullable=True)
     b_score = db.Column(db.Integer,nullable=False)
     b_heat = db.Column(db.Integer,nullable=False)
     b_date = db.Column(db.String(20),nullable=False)
