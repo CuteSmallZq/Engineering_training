@@ -51,9 +51,10 @@ class Tag(db.Model):
     __tablename__ = 'tag'
     t_id = db.Column(db.Integer(20),primary_key=True)
     t_tag = db.Column(db.String(100),nullable=False)
-    movies = relationship("movie", secondary=tag_associate_movie, backref="TagstoMovie")
-    books = relationship("book", secondary=tag_associate_book, backref="TagstoBook")
-    music = relationship("music", secondary=tag_associate_music, backref="TagstoMusic")
+    movies = db.relationship("movie", secondary=tag_associate_movie, backref="TagstoMovie")
+    books = db.relationship("book", secondary=tag_associate_book, backref="TagstoBook")
+    music = db.relationship("music", secondary=tag_associate_music, backref="TagstoMusic")
+    users = db.relationship("user", secondary=user_like_tags, backref="UserlikeTags")
 
 
 class User_Comment_Movie(db.Model):
@@ -102,10 +103,10 @@ class User_to_Book(db.Model):
     seen = db.Column(db.BOOLEAN,nullable=True)
     want = db.Column(db.BOOLEAN,nullable=True)
 
-class User_Like_Tags(db.Model):
-    __tablename__ = 'userLikeTags'
-    u_id = db.Column(db.Integer(20),primary_key=True)
-    t_id = db.Column(db.Integer(20),primary_key=True)
+user_like_tags  = db.Table('userLikeTags',db.metadata,
+                              db.Column('t_id',db.Integer(20),db.ForeignKey('tag.t_id')),
+                              db.Column('u_id',db.Integer(20),db.ForeignKey('user.u_id'))
+                              )
 
 tag_associate_book = db.Table('tagToBook',db.metadata,
                               db.Column('t_id',db.Integer(20),db.ForeignKey('tag.t_id')),
