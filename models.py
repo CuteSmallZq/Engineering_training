@@ -1,6 +1,6 @@
 from exts import db
 
-#String or string ?
+#char or string ?
 class Movies (db.Model):
     __tablename__ = 'movies'
     mo_id = db.Column(db.Integer(20),primary_key=True)
@@ -51,10 +51,10 @@ class Tag(db.Model):
     __tablename__ = 'tag'
     t_id = db.Column(db.Integer(20),primary_key=True)
     t_tag = db.Column(db.String(100),nullable=False)
-    movies = db.relationship("movie", secondary=tag_associate_movie, backref="TagstoMovie")
-    books = db.relationship("book", secondary=tag_associate_book, backref="TagstoBook")
-    music = db.relationship("music", secondary=tag_associate_music, backref="TagstoMusic")
-    users = db.relationship("user", secondary=user_like_tags, backref="UserlikeTags")
+    movies = db.relationship('movie', secondary=tag_associate_movie, backref=db.backref('TagstoMovie'))
+    books = db.relationship('book', secondary=tag_associate_book, backref=db.backref('TagstoBook'))
+    music = db.relationship('music', secondary=tag_associate_music, backref=db.backref('TagstoMusic'))
+    users = db.relationship('user', secondary=user_like_tags, backref=db.backref('UserlikeTags'))
 
 
 class User_Comment_Movie(db.Model):
